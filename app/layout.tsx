@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import './globals.css'
+import "./globals.css";
+import { UserDataProvider } from "./universal/context/UserDataContext";
 
 export const metadata: Metadata = {
   title: "Pulse Playlist",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {/* Wrap children with UserDataProvider */}
+        <UserDataProvider>{children}</UserDataProvider>
+      </body>
     </html>
   );
 }
