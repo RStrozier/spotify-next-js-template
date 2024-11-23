@@ -1,14 +1,13 @@
 "use client";
 import { useUserData } from "../universal/hooks/useUserdata";
+import LoadingIndicator from "../universal/LoadingIndicator";
 
 export default function HomePage() {
   const { userData, loading } = useUserData(); 
   // While loading, show a spinner or message
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        <p>Loading...</p>
-      </div>
+      <LoadingIndicator />
     );
   }
 
