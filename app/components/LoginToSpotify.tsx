@@ -1,22 +1,19 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 // Spotify Authorization Helpers
 const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID!;
-const redirectUri =
-  process.env.NODE_ENV === "production"
-    ? process.env.NEXT_PUBLIC_PROD_SPOTIFY_REDIRECT_URI!
-    : process.env.NEXT_PUBLIC_DEV_SPOTIFY_REDIRECT_URI!;
-const scopes = process.env.NEXT_PUBLIC_SPOTIFY_SCOPES!;
+const redirectUri = process.env.NEXT_PUBLIC_DEV_SPOTIFY_REDIRECT_URI!; // Redirect URI set in Spotify Developer Dashboard
+const scopes = process.env.NEXT_PUBLIC_SPOTIFY_SCOPES!; // Scopes for the Spotify API
 
 const getAuthUrl = (): string => {
+  // Constructs the Spotify authorization URL
   return `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&redirect_uri=${encodeURIComponent(
     redirectUri
   )}&scope=${encodeURIComponent(scopes)}`;
 };
 
 const redirectToSpotifyAuth = (): void => {
+  // Redirects the user to Spotify's authorization page
   window.location.href = getAuthUrl();
 };
 
@@ -28,7 +25,7 @@ const LoginToSpotify = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const res = await fetch("/api/me"); // This calls your `/api/me` endpoint
+        const res = await fetch("/api/me"); // Calls `/api/me` endpoint
         if (res.ok) {
           const data = await res.json();
           setUserData(data); // Store user profile data
@@ -50,7 +47,7 @@ const LoginToSpotify = () => {
     return (
       <main className="flex items-center justify-center h-screen">
         <button
-          onClick={redirectToSpotifyAuth}
+          onClick={redirectToSpotifyAuth} // Calls the redirectToSpotifyAuth function
           className="px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600"
         >
           Login with Spotify

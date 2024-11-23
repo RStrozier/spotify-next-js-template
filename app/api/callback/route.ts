@@ -1,49 +1,50 @@
-import { NextRequest, NextResponse } from 'next/server';
-import axios from 'axios';
+import { NextRequest, NextResponse } from "next/server";
+import axios from "axios";
 
 export async function GET(req: NextRequest) {
-  const code = req.nextUrl.searchParams.get('code'); // Get the authorization code from query string
+  const url = new URL(req.url); // Parse the incoming request URL
+  const code = url.searchParams.get("code");
 
   if (!code) {
-    return NextResponse.json({ error: 'Authorization code is missing' }, { status: 400 });
+    return NextResponse.json({ error: "Authorization code is missing" }, { status: 400 });
   }
 
   try {
-    // Spotify Token URL
-    const tokenUrl = 'https://accounts.spotify.com/api/token';
+    // Spotify Token Endpoint (MUST be an absolute URL)
+    const tokenEndpoint = "https://accounts.spotify.com/api/token";
 
-    // Request body as x-www-form-urlencoded
-    const params = new URLSearchParams();
-    params.append('grant_type', 'authorization_code');
-    params.append('code', code);
-    params.append('redirect_uri', process.env.SPOTIFY_REDIRECT_URI!);
-    params.append('client_id', process.env.SPOTIFY_CLIENT_ID!);
-    params.append('client_secret', process.env.SPOTIFY_CLIENT_SECRET!);
-
-    // Exchange the code for tokens
-    const response = await axios.post(tokenUrl, params.toString(), {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-    });
-
-    const { access_token, refresh_token, expires_in } = response.data;
-
-    // Set tokens in secure HTTP-only cookies
-    const responseHeaders = new Headers();
-    responseHeaders.append(
-      'Set-Cookie',
-      `access_token=${access_token}; HttpOnly; Secure; Path=/; Max-Age=${expires_in}`
-    );
-    responseHeaders.append(
-      'Set-Cookie',
-      `refresh_token=${refresh_token}; HttpOnly; Secure; Path=/; Max-Age=604800` // 7 days
+    // Exchange the authorization code for an access token
+    const response = await axios.post(
+      tokenEndpoint,
+      new URLSearchParams({
+        grant_type: "authorization_code",
+        code,
+        redirect_uri: process.env.NEXT_PUBLIC_DEV_SPOTIFY_REDIRECT_URI!, // Make sure this is an absolute URL
+        client_id: process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID!,
+        client_secret: process.env.SPOTIFY_CLIENT_SECRET!,
+      }),
+      {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      }
     );
 
-    // Redirect the user back to the homepage
-    return NextResponse.redirect('/', { headers: responseHeaders });
+    const { access_token, expires_in } = response.data;
+
+    // Set the access token as a cookie
+    const headers = new Headers();
+    headers.append(
+      "Set-Cookie",
+      `access_token=${access_token}; Path=/; HttpOnly; Max-Age=${expires_in}`
+    );
+
+    // Redirect to /home (You must use an absolute URL)
+    const homeUrl = new URL("/home", req.url); // Converts `/home` to an absolute URL based on the request
+    return NextResponse.redirect(homeUrl, { headers });
   } catch (error: any) {
-    console.error('Error exchanging code for tokens:', error.response?.data || error.message);
-    return NextResponse.json({ error: 'Failed to exchange code for tokens' }, { status: 500 });
+    console.error("Error exchanging code for tokens:", error.response?.data || error.message);
+    return NextResponse.json(
+      { error: "Failed to exchange code for tokens", details: error.message },
+      { status: 500 }
+    );
   }
 }
