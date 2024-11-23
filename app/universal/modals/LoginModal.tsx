@@ -44,7 +44,6 @@ export default function LoginModal() {
             closeAfterTransition // Ensures smooth fade-out
             BackdropProps={{
               timeout: 500, // Makes the fade effect smoother for the backdrop
-              style: { backgroundColor: "rgba(0, 0, 0, 0.8)" },
             }}
           >
             <Fade in={isModalOpen} timeout={500}>
