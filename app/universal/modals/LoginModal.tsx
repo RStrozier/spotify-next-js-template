@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Modal, Box } from "@mui/material";
@@ -41,13 +42,16 @@ export default function LoginModal() {
             open={isModalOpen}
             onClose={() => {}} // Disable default close behavior
             disableEscapeKeyDown // Prevent closing with Escape key
+            BackdropProps={{
+              style: { backgroundColor: "rgba(0, 0, 0, 0.8)" },
+            }}
           >
             <Box
               sx={{
                 position: "absolute",
                 top: "50%",
                 left: "50%",
-                transform: "translate(-50%, -50%)",
+                transform: "translate(-50%, -50%)", // Keeps the modal centered
                 width: 400,
                 bgcolor: "rgba(26, 26, 26, 1)",
                 boxShadow: 24,
@@ -57,6 +61,10 @@ export default function LoginModal() {
                 flexDirection: "column",
                 alignItems: "center",
                 textAlign: "center",
+                transition: "transform 0.2s ease-in-out", // Smooth scaling animation
+                "&:hover": {
+                  transform: "translate(-50%, -50%) scale(1.05)", // Grows slightly, stays centered
+                },
               }}
             >
               {/* Modal Content */}
