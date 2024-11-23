@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import axios from "axios";
+import axios from "axios"; // Import AxiosError
 
 export async function GET(req: NextRequest) {
   const url = new URL(req.url); // Parse the incoming request URL
@@ -40,11 +40,23 @@ export async function GET(req: NextRequest) {
     // Redirect to /home (You must use an absolute URL)
     const homeUrl = new URL("/home", req.url); // Converts `/home` to an absolute URL based on the request
     return NextResponse.redirect(homeUrl, { headers });
-  } catch (error: any) {
-    console.error("Error exchanging code for tokens:", error.response?.data || error.message);
-    return NextResponse.json(
-      { error: "Failed to exchange code for tokens", details: error.message },
-      { status: 500 }
-    );
+  } catch (error: unknown) {
+    // Ensure error is of type AxiosError
+    if (axios.isAxiosError(error)) {
+      console.error("Axios error exchanging code for tokens:", error.response?.data || error.message);
+      return NextResponse.json(
+        {
+          error: "Failed to exchange code for tokens",
+          details: error.response?.data || error.message,
+        },
+        { status: 500 }
+      );
+    } else {
+      console.error("Unexpected error exchanging code for tokens:", (error as Error).message);
+      return NextResponse.json(
+        { error: "An unexpected error occurred", details: (error as Error).message },
+        { status: 500 }
+      );
+    }
   }
 }

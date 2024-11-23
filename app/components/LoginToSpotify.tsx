@@ -17,9 +17,16 @@ const redirectToSpotifyAuth = (): void => {
   window.location.href = getAuthUrl();
 };
 
+// Define the structure of `userData`
+interface UserData {
+  display_name: string;
+  email: string;
+  images?: { url: string }[]; // Optional `images` array
+}
+
 const LoginToSpotify = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<UserData | null>(null); // Use `UserData` type
 
   // Check if the user is logged in by verifying the access_token cookie
   useEffect(() => {
@@ -27,7 +34,7 @@ const LoginToSpotify = () => {
       try {
         const res = await fetch("/api/me"); // Calls `/api/me` endpoint
         if (res.ok) {
-          const data = await res.json();
+          const data: UserData = await res.json(); // Cast the response to `UserData`
           setUserData(data); // Store user profile data
           setIsLoggedIn(true); // User is logged in
         } else {
