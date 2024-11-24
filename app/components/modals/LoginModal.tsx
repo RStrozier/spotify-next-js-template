@@ -4,6 +4,7 @@ import Image from "next/image";
 import { Modal, Box, Fade } from "@mui/material"; // Import Fade
 import logo from "../../../public/imgs/final-logo-pulse-playlist.png";
 
+
 export default function LoginModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   // Handle login button click and close the modal (with redirect logic)
   const handleLogin = () => {

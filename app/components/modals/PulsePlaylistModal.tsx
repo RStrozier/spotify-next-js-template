@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, Collapse, Modal, Box } from '@mui/material';
-
 import { AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
 import FavoritePlaylist from '@/app/components/playlist/FavoritePlaylist';

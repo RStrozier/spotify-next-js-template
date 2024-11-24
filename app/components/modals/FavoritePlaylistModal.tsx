@@ -3,8 +3,19 @@ import { Modal, Box, Button, TextField } from '@mui/material';
 import moodWords from '../../universal/data/mood-word-generator.json';
 import { FavoritePlaylistModalProps } from '@/app/universal/data/interfaces';
 import { useMood } from '@/app/universal/context/MoodContext';
-import { favoritePlaylistModalStyle } from '@/app/universal/data/styleTypes';
 import CustomAlert from '../alerts/CustomAlert';
+
+export const favoritePlaylistModalStyle = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 
 const FavoritePlaylistModal = ({ open, onClose, onSave }: FavoritePlaylistModalProps) => {

@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from 'react';
-import PulsePlaylistMessage from './PulsePlaylistMessage';
-import useTracks from '@/app/universal/hooks/useTracks';
-import PulsePlaylistModal from '../modals/PulsePlaylistModal';
+import useTracks from "@/app/universal/hooks/useTracks";
+import { useState } from "react";
+import PulsePlaylistModal from "../modals/PulsePlaylistModal";
+import PulsePlaylistMessage from "./PulsePlaylistMessage";
 
 const PulsePlaylist = () => {
-    // pulling in custom hook 
-    const tracks = useTracks();
+    const tracks = useTracks(); // Pull tracks from the custom hook
     const [modalOpen, setModalOpen] = useState(false);
 
     // Function to close the modal
@@ -15,9 +14,10 @@ const PulsePlaylist = () => {
         setModalOpen(false);
     };
 
+    console.log("Tracks in PulsePlaylist:", tracks); // Debug tracks
+
     return (
         <>
-
             {tracks.length > 0 ? (
                 <>
                     <PulsePlaylistModal
@@ -26,7 +26,6 @@ const PulsePlaylist = () => {
                     />
                     <PulsePlaylistMessage />
                 </>
-
             ) : (
                 <>
                     <div className="spacer"></div>
