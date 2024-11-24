@@ -16,7 +16,7 @@ import Link from "next/link";
 import "./navbar.css";
 
 const Navbar = () => {
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+ const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
 
   const toggleDrawer = (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
     if (event.type === "keydown") {

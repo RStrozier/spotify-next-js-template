@@ -1,11 +1,16 @@
 "use client";
 
 import Image from "next/image";
-import { Modal, Box, Fade } from "@mui/material"; // Import Fade
+import { Modal, Box, Fade, Backdrop } from "@mui/material"; // Import Backdrop
 import logo from "../../../public/imgs/final-logo-pulse-playlist.png";
 
-
-export default function LoginModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+export default function LoginModal({
+  isOpen,
+  onClose,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+}) {
   // Handle login button click and close the modal (with redirect logic)
   const handleLogin = () => {
     onClose(); // Trigger the onClose callback
@@ -20,8 +25,12 @@ export default function LoginModal({ isOpen, onClose }: { isOpen: boolean; onClo
         onClose={onClose} // Trigger the onClose callback when the modal is closed
         disableEscapeKeyDown // Prevent closing with Escape key
         closeAfterTransition // Ensures smooth fade-out
+        BackdropComponent={Backdrop} // Use custom Backdrop
         BackdropProps={{
-          timeout: 500, // Makes the fade effect smoother for the backdrop
+          timeout: 500, // Smooth fade effect for the backdrop
+          sx: {
+            backgroundColor: "rgba(0, 0, 0, 0.8)", // Semi-transparent black background
+          },
         }}
       >
         <Fade in={isOpen} timeout={500}>
