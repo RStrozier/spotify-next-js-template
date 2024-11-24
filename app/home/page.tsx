@@ -1,22 +1,34 @@
 "use client";
-import { useUserData } from "../universal/hooks/useUserdata";
+
+import { useEffect, useState } from "react";
+import { useUserDataContext } from "../universal/context/UserDataContext";
+import LoginModal from "../universal/modals/LoginModal";
 import LoadingIndicator from "../universal/LoadingIndicator";
 
 export default function HomePage() {
-  const { userData, loading } = useUserData(); 
-  // While loading, show a spinner or message
+  const { userData, loading } = useUserDataContext(); // Access user data and loading state
+  const [isModalOpen, setIsModalOpen] = useState(false); // Control modal visibility
+
+  // Open the modal if no user data exists after loading is complete
+  useEffect(() => {
+    if (!loading && !userData) {
+      setIsModalOpen(true); // Open the modal if user is logged out
+    }
+  }, [loading, userData]);
+
+  // Close the modal using a callback
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  // While loading, show a spinner
   if (loading) {
-    return (
-      <LoadingIndicator />
-    );
+    return <LoadingIndicator />;
   }
 
-  // If no user data exists, redirect to the login page 
+  // If no user data exists, keep modal open and render fallback
   if (!userData) {
-    if (typeof window !== "undefined") {
-      window.location.href = "/";
-    }
-    return null;
+    return <LoginModal isOpen={isModalOpen} onClose={handleCloseModal} />;
   }
 
   // Render the user's profile
