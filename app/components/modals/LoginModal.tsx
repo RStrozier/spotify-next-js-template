@@ -55,6 +55,7 @@ export default function LoginModal({
             }}
           >
             {/* Modal Content */}
+
             <Image
               src={logo}
               alt="Pulse Playlist Logo"
@@ -67,7 +68,10 @@ export default function LoginModal({
               className="px-6 py-3 bg-green-500 text-white rounded-md hover:bg-green-600"
             >
               Login with Spotify
-            </button>
+            </button>            
+            <div className="mt-3 mx-4 text-xs text-gray-300">Please Note: This site is currently under 
+              development. Only authorized users have access at this time.
+            </div>
           </Box>
         </Fade>
       </Modal>

@@ -45,8 +45,8 @@ const MoodSelector = () => {
         <div className="text-center my-4 mx-2 shadow-lg">
             <div className="text-xl mb-2 text-gray-200 header-font">Select Your Mood</div>
             <MoodDescription />
-            <div className="spacer"></div>
-            <div className="flex justify-center items-center py-3 px-2">
+            <div className="mini-spacer"></div>
+            <div className="flex justify-center items-center py-2 px-2">
                 <Button
                     onClick={toggleExpand}
                     className="flex items-center justify-center text-white font-bold py-2 px-4 rounded-full bg-blue-600 hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-105"
@@ -57,7 +57,7 @@ const MoodSelector = () => {
                     </span>
                 </Button>
             </div>
-            <div className="mini-spacer"></div>
+            <div className="spacer"></div>
 
             {/* Full-page overlay for moods */}
             {isExpanded && (
@@ -92,12 +92,12 @@ const MoodSelector = () => {
 
             {/* Selects mood and generates a pulse playlist */}
             <Button
-                variant="contained"
-                onClick={handleGeneratePlaylist}
-                className="bg-red-500 hover:bg-red-600 text-white font-nunito font-bold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all"
-            >
-                Generate My<span className="mx-1 text-red-200">{selectedMood}</span>Playlist!
-            </Button>
+  variant="contained"
+  onClick={handleGeneratePlaylist}
+  className="bg-red-500 hover:bg-red-600 text-white font-nunito font-bold py-3 px-6 rounded-lg shadow-lg transform transition-all pulse-button"
+>
+  Generate My<span className="mx-1 text-red-200">{selectedMood}</span>Playlist!
+</Button>
 
             <MoodAlert />
             <br />

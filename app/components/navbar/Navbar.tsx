@@ -1,4 +1,4 @@
-"use client"; // Add this if you're using Next.js app directory with client-side rendering
+"use client"; 
 
 import { useState } from "react";
 import Toolbar from "@mui/material/Toolbar";
@@ -74,7 +74,7 @@ const Navbar = () => {
               <MenuIcon sx={{ fontSize: "36px" }} />
             </IconButton>
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              <Link href="/mood-selector" passHref>
+              <Link href="/home" passHref>
                 <span className="header-roboto navbar-logo-text">
                   <span className="text-red-600">Pulse </span>Playlist
                 </span>
