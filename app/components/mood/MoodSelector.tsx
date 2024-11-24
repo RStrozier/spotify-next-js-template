@@ -92,12 +92,12 @@ const MoodSelector = () => {
 
             {/* Selects mood and generates a pulse playlist */}
             <Button
-  variant="contained"
-  onClick={handleGeneratePlaylist}
-  className="bg-red-500 hover:bg-red-600 text-white font-nunito font-bold py-3 px-6 rounded-lg shadow-lg transform transition-all pulse-button"
->
-  Generate My<span className="mx-1 text-red-200">{selectedMood}</span>Playlist!
-</Button>
+                variant="contained"
+                onClick={handleGeneratePlaylist}
+                className="bg-red-500 hover:bg-red-600 text-white font-nunito font-bold py-3 px-6 rounded-lg shadow-lg transform transition-all pulse-button"
+            >
+                Generate My<span className="mx-1 text-red-200">{selectedMood}</span>Playlist!
+            </Button>
 
             <MoodAlert />
             <br />

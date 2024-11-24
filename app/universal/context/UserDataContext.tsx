@@ -19,6 +19,7 @@ export const UserDataProvider = ({ children }: { children: ReactNode }) => {
   const [userData, setUserData] = useState<UserData | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [favoritePlaylists, setFavoritePlaylists] = useState<Playlist[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   // Update userData when fetched data is available
   useEffect(() => {
@@ -30,10 +31,27 @@ export const UserDataProvider = ({ children }: { children: ReactNode }) => {
   // Retrieve the access token from cookies on component mount
   useEffect(() => {
     const token = Cookies.get("accessToken");
+    console.log("Retrieved access token from cookies during initialization:", token); // Debugging
     if (token) {
       setAccessToken(token);
     }
+    setIsInitialized(true); // Mark as initialized
   }, []);
+
+  // Sync accessToken with cookies whenever it changes
+  useEffect(() => {
+    if (!isInitialized) return; // Don't sync until initialization is complete
+
+    if (accessToken) {
+      // Write the token to cookies
+      Cookies.set("accessToken", accessToken, { expires: 7 }); // Set expiry to 7 days
+      console.log("Access token written to cookies:", accessToken); // Debugging
+    } else {
+      // Remove the token if it's null
+      Cookies.remove("accessToken");
+      console.log("Access token removed from cookies"); // Debugging
+    }
+  }, [accessToken, isInitialized]);
 
   // Logic to toggle favorite playlists
   const toggleFavoritePlaylist = (playlistId: string, songs: string[], playlistName: string) => {
