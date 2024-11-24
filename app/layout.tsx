@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { UserDataProvider } from "./universal/context/UserDataContext";
+import { MoodProvider } from "./universal/context/MoodContext";
+import { ToggleProvider } from "./universal/context/ToggleContext";
 
 export const metadata: Metadata = {
   title: "Pulse Playlist",
@@ -15,8 +17,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {/* Wrap children with UserDataProvider */}
-        <UserDataProvider>{children}</UserDataProvider>
+        {/* Nest providers to make their contexts available throughout the app */}
+        <UserDataProvider>
+          <MoodProvider>
+            <ToggleProvider>
+              {children}
+            </ToggleProvider>
+          </MoodProvider>
+        </UserDataProvider>
       </body>
     </html>
   );

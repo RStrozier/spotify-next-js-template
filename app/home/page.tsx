@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useUserDataContext } from "../universal/context/UserDataContext";
-import LoginModal from "../universal/modals/LoginModal";
 import LoadingIndicator from "../universal/LoadingIndicator";
 import SpotifyUserDisplay from "../components/user/SpotifyUserDisplay";
+import MoodSelector from "../components/mood/MoodSelector";
+import LoginModal from "../components/modals/LoginModal";
 
 export default function HomePage() {
   const { userData, loading } = useUserDataContext(); // Access user data and loading state
@@ -32,8 +33,11 @@ export default function HomePage() {
     return <LoginModal isOpen={isModalOpen} onClose={handleCloseModal} />;
   }
 
-  // Render the user's profile
   return (
-   <SpotifyUserDisplay />
+    <>
+       <SpotifyUserDisplay />
+       <MoodSelector />
+    </>
+
   );
 }

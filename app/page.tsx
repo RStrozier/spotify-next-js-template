@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import LoginModal from "./universal/modals/LoginModal";
+import LoginModal from "./components/modals/LoginModal";
 
 export default function Page() {
   const [isModalOpen, setIsModalOpen] = useState(false); // Control modal visibility
