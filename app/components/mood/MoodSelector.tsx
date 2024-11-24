@@ -4,7 +4,7 @@ import { useState } from 'react';
 import moodData from '../../universal/data/moods.json';
 import moodDescriptions from '../../universal/data/mood-descriptions.json';
 import { Button, Tooltip } from '@mui/material';
-import { MdExpandMore, MdExpandLess } from 'react-icons/md'; 
+import { MdExpandMore, MdExpandLess } from 'react-icons/md';
 import { MoodKey } from '@/app/universal/data/interfaces';
 import { useMood } from '@/app/universal/context/MoodContext';
 import MoodDescription from './MoodDescription';
@@ -33,7 +33,7 @@ const MoodSelector = () => {
             setSelectedMood(selectedMood);
             setModalOpen(true); // Open the modal when generating the playlist
         } else {
-            showAlert(); 
+            showAlert();
         }
     };
 
@@ -46,11 +46,12 @@ const MoodSelector = () => {
             <div className="text-xl mb-2 text-gray-200 header-font">Select Your Mood</div>
             <MoodDescription />
             <div className="mini-spacer"></div>
-            {/* expand moods and view less button */}
-            <Button onClick={toggleExpand} className="flex items-center justify-center">
-                {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
-                <span className="ml-2 text-base">{isExpanded ? 'Close Moods' : 'View Moods'}</span>
-            </Button>
+            <div className="flex justify-center items-center">
+                <Button onClick={toggleExpand} className="flex items-center justify-center">
+                    {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
+                    <span className="ml-2 text-base">{isExpanded ? 'Close Moods' : 'View Moods'}</span>
+                </Button>
+            </div>
             <div className="mini-spacer"></div>
 
             {/* Full-page overlay for moods */}
@@ -66,9 +67,8 @@ const MoodSelector = () => {
                             >
                                 <Button
                                     variant="contained"
-                                    className={`transition-colors duration-300 ${
-                                        selectedMood === mood ? 'bg-purple-500' : 'bg-gray-700'
-                                    }`}
+                                    className={`transition-colors duration-300 ${selectedMood === mood ? 'bg-purple-500' : 'bg-gray-700'
+                                        }`}
                                     onClick={() => handleMoodSelect(mood)}
                                     sx={{
                                         backgroundColor:

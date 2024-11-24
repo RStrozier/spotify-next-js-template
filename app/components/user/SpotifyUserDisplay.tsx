@@ -12,18 +12,22 @@ export default function SpotifyUserDisplay() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="text-2xl font-bold">Welcome, {userData.display_name}!</h1>
+    <div className="flex flex-col items-center justify-center text-center bg-gray-800">
+      <div className="p-4 rounded-lg">
+        <h1 className="text-2xl font-bold">Welcome, {userData.display_name}!</h1>
 
-      {userData.images?.[0]?.url && (
-        <img
-          src={userData.images[0].url}
-          alt="Profile"
-          className="w-32 h-32 rounded-full mt-4"
-        />
-      )}
+        {userData.images?.[0]?.url && (
+          <div className="flex justify-center mt-4">
+            <img
+              src={userData.images[0].url}
+              alt="Profile"
+              className="w-32 h-32 rounded-full"
+            />
+          </div>
+        )}
 
-      <p className="mt-2 text-gray-600">Email: {userData.email}</p>
+        <p className="mt-2 text-gray-600">Email: {userData.email}</p>
+      </div>
     </div>
   );
 }
