@@ -45,7 +45,7 @@ const MoodSelector = () => {
         <div className="text-center my-4 mx-2">
             <div className="text-xl mb-2 text-gray-200 header-font">Select Your Mood</div>
             <MoodDescription />
-            <div className="mini-spacer"></div>
+            <div className="spacer"></div>
             <div className="flex justify-center items-center">
                 <Button onClick={toggleExpand} className="flex items-center justify-center">
                     {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
@@ -100,19 +100,19 @@ const MoodSelector = () => {
                 </div>
             )}
 
-            <div className="default-roboto mb-1 text-sm">
-                Select Mood from above.
-                <br />
-                Click below to generate unique playlist.
+            {/* <div className="default-roboto text-sm">
+                Select mood above.  Click below to generate pulse playlist.
             </div>
-            <div className="spacer"></div>
+            <div className="spacer"></div> */}
 
             {/* Selects mood and generates a pulse playlist */}
             <Button
                 variant="contained"
-                className="p-1"
-                style={{ color: 'white' }}
                 onClick={handleGeneratePlaylist}
+               className="px-6 py-3 bg-red-500 text-white rounded-md hover:bg-red-600 transition-transform hover:scale-105"
+                style={{
+                    textTransform: "none", // Removes all-uppercase text (optional)
+                }}
             >
                 Generate <span className="mx-1 text-red-200">{selectedMood}</span> Playlist!
             </Button>
