@@ -7,7 +7,7 @@ import { useSpotifyRecommendations } from "@/app/universal/hooks/useSpotifyRecco
 
 const PulsePlaylist = () => {
   // Pulling in the custom Spotify hook
-  const { tracks, loading, error } = useSpotifyRecommendations();
+  const { tracks, loading } = useSpotifyRecommendations();
   const [modalOpen, setModalOpen] = useState(false);
 
   // Function to close the modal
@@ -16,13 +16,11 @@ const PulsePlaylist = () => {
   };
 
   return (
-    <>
+    <div className="text-center">
       {/* Handle loading, error, and tracks state */}
       {loading ? (
         <p>Loading tracks...</p>
-      ) : error ? (
-        <p className="text-red-500">Error: {error}</p>
-      ) : tracks.length > 0 ? (
+      )  : tracks.length > 0 ? (
         <>
           <button
             onClick={() => setModalOpen(true)}
@@ -32,16 +30,14 @@ const PulsePlaylist = () => {
             View Playlist
           </button>
           <PulsePlaylistModal open={modalOpen} onClose={handleCloseModal} />
-          <PulsePlaylistMessage />
         </>
       ) : (
         <>
-          <div className="spacer"></div>
+          {/* Display the PulsePlaylistMessage */}
           <PulsePlaylistMessage />
-          <p>No tracks found. Please select a mood to generate a playlist.</p>
         </>
       )}
-    </>
+    </div>
   );
 };
 
