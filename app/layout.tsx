@@ -5,7 +5,6 @@ import { MoodProvider } from "./universal/context/MoodContext";
 import { ToggleProvider } from "./universal/context/ToggleContext";
 import Navbar from "./components/navbar/Navbar";
 
-
 export const metadata: Metadata = {
   title: "Pulse Playlist",
   description: "The playlist for every emotion",
@@ -13,9 +12,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html lang="en">
       <head>
@@ -26,13 +25,10 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {/* Nest providers to make their contexts available throughout the app */}
         <UserDataProvider>
           <MoodProvider>
             <ToggleProvider>
-              {/* Render the Navbar at the top of the layout */}
               <Navbar />
-              {/* Render the rest of the page content */}
               {children}
             </ToggleProvider>
           </MoodProvider>

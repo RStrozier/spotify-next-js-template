@@ -47,9 +47,9 @@ const MoodSelector = () => {
             <MoodDescription />
             <div className="spacer"></div>
             <div className="flex justify-center items-center">
-                <Button onClick={toggleExpand} className="flex items-center justify-center">
+                <Button onClick={toggleExpand} className="flex items-center justify-center  hover:text-blue-700 underline transition-all">
                     {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
-                    <span className="ml-2 text-base">{isExpanded ? 'Close Moods' : 'View Moods'}</span>
+                    <span className="ml-2 text-base">{isExpanded ? 'Close Moods' : 'Select Mood'}</span>
                 </Button>
             </div>
             <div className="mini-spacer"></div>
@@ -109,16 +109,13 @@ const MoodSelector = () => {
             <Button
                 variant="contained"
                 onClick={handleGeneratePlaylist}
-               className="px-6 py-3 bg-red-500 text-white rounded-md hover:bg-red-600 transition-transform hover:scale-105"
-                style={{
-                    textTransform: "none", // Removes all-uppercase text (optional)
-                }}
+                className="bg-red-500 hover:bg-red-600 text-white font-nunito font-bold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all"
             >
-                Generate <span className="mx-1 text-red-200">{selectedMood}</span> Playlist!
+                Generate<span className="mx-1 text-red-200">{selectedMood}</span> Playlist!
             </Button>
 
             <MoodAlert />
-            <div className="mini-spacer"></div>
+            <div className="spacer"></div>
 
             {/* Add the modal component here */}
             <PulsePlaylistModal open={modalOpen} onClose={handleCloseModal} />

@@ -14,7 +14,7 @@ export default function SpotifyUserDisplay() {
   return (
     <div className="flex flex-col items-center justify-center text-center bg-gray-800">
       <div className="p-4 rounded-lg">
-        <h1 className="text-2xl mt-1 font-montserrat font-bold tracking-wide text-center text-white">
+        <h1 className="text-2xl mt-1 font-montserrat font-light tracking-wide text-center text-white animate-fade-in">
           Welcome, <span className="text-red-500">{userData.display_name}!</span>
         </h1>
 
