@@ -26,14 +26,14 @@ export default function Page() {
   };
 
   return (
-    <>
+    <div className="h-screen w-screen bg-gradient-to-b from-red-500 to-blue-500">
       {loading ? (
-        <div className="flex items-center justify-center h-screen w-screen">
-          <p>Loading...</p>
+        <div className="flex items-center justify-center h-full">
+          <p className="text-white text-xl">Loading...</p>
         </div>
       ) : (
         <LoginModal isOpen={isModalOpen} onClose={handleCloseModal} />
       )}
-    </>
+    </div>
   );
 }

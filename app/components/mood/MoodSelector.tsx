@@ -52,9 +52,10 @@ const MoodSelector = () => {
                 <span className="ml-2 text-base">{isExpanded ? 'Close Moods' : 'View Moods'}</span>
             </Button>
             <div className="mini-spacer"></div>
+
             {/* Full-page overlay for moods */}
             {isExpanded && (
-                <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center overflow-auto">
+                <div className="fixed inset-0 bg-gradient-to-b from-red-500 to-blue-500 z-50 flex flex-col items-center justify-center overflow-auto">
                     <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
                         {moods.map((mood) => (
                             <Tooltip
@@ -65,14 +66,20 @@ const MoodSelector = () => {
                             >
                                 <Button
                                     variant="contained"
-                                    className={`transition-colors duration-300 ${selectedMood === mood ? 'bg-purple-500' : 'bg-gray-700'}`}
+                                    className={`transition-colors duration-300 ${
+                                        selectedMood === mood ? 'bg-purple-500' : 'bg-gray-700'
+                                    }`}
                                     onClick={() => handleMoodSelect(mood)}
                                     sx={{
-                                        backgroundColor: selectedMood === mood ? 'rgba(255, 0, 0, 0.8)' : '#333',
+                                        backgroundColor:
+                                            selectedMood === mood ? 'rgba(255, 0, 0, 0.8)' : '#333',
                                         color: '#F0F0F0',
                                         padding: '4px 8px',
                                         border: '2px solid transparent',
-                                        backgroundImage: selectedMood === mood ? 'linear-gradient(to right, rgba(255, 0, 0, 0.8), rgba(0, 0, 50, 1))' : 'none',
+                                        backgroundImage:
+                                            selectedMood === mood
+                                                ? 'linear-gradient(to right, rgba(255, 0, 0, 0.8), rgba(0, 0, 50, 1))'
+                                                : 'none',
                                         backgroundClip: 'padding-box',
                                         boxShadow: '0px 0px 2px rgba(275, 0, 0, 0.4)',
                                         fontFamily: 'default-roboto',
@@ -93,27 +100,28 @@ const MoodSelector = () => {
                 </div>
             )}
 
-            <div className='default-roboto mb-1 text-sm'>
+            <div className="default-roboto mb-1 text-sm">
                 Select Mood from above.
                 <br />
                 Click below to generate unique playlist.
             </div>
             <div className="spacer"></div>
-            {/* selects mood and generates a pulse playlist */}
+
+            {/* Selects mood and generates a pulse playlist */}
             <Button
                 variant="contained"
                 className="p-1"
                 style={{ color: 'white' }}
                 onClick={handleGeneratePlaylist}
             >
-                Generate <span className='mx-1 text-red-200'>{selectedMood}</span> Playlist!
+                Generate <span className="mx-1 text-red-200">{selectedMood}</span> Playlist!
             </Button>
-            
+
             <MoodAlert />
             <div className="mini-spacer"></div>
-            
+
             {/* Add the modal component here */}
-            <PulsePlaylistModal open={modalOpen} onClose={handleCloseModal} /> 
+            <PulsePlaylistModal open={modalOpen} onClose={handleCloseModal} />
         </div>
     );
 };
