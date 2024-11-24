@@ -3,6 +3,8 @@ import "./globals.css";
 import { UserDataProvider } from "./universal/context/UserDataContext";
 import { MoodProvider } from "./universal/context/MoodContext";
 import { ToggleProvider } from "./universal/context/ToggleContext";
+import Navbar from "./components/navbar/Navbar";
+
 
 export const metadata: Metadata = {
   title: "Pulse Playlist",
@@ -21,6 +23,9 @@ export default function RootLayout({
         <UserDataProvider>
           <MoodProvider>
             <ToggleProvider>
+              {/* Render the Navbar at the top of the layout */}
+              <Navbar />
+              {/* Render the rest of the page content */}
               {children}
             </ToggleProvider>
           </MoodProvider>
