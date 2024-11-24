@@ -49,7 +49,7 @@ export interface UserData {
     userData: UserData | null;
     setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
     accessToken: string | null;
-    setAccessToken: React.Dispatch<React.SetStateAction<string | null>>;
+    setAccessToken: (token: string | null) => void;
     loading: boolean;
   }
 

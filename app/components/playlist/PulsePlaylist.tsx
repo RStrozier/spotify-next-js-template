@@ -1,39 +1,48 @@
 "use client";
 
-import useTracks from "@/app/universal/hooks/useTracks";
 import { useState } from "react";
 import PulsePlaylistModal from "../modals/PulsePlaylistModal";
 import PulsePlaylistMessage from "./PulsePlaylistMessage";
+import { useSpotifyRecommendations } from "@/app/universal/hooks/useSpotifyReccomendation";
 
 const PulsePlaylist = () => {
-    const tracks = useTracks(); // Pull tracks from the custom hook
-    const [modalOpen, setModalOpen] = useState(false);
+  // Pulling in the custom Spotify hook
+  const { tracks, loading, error } = useSpotifyRecommendations();
+  const [modalOpen, setModalOpen] = useState(false);
 
-    // Function to close the modal
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
+  // Function to close the modal
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
-    console.log("Tracks in PulsePlaylist:", tracks); // Debug tracks
-
-    return (
+  return (
+    <>
+      {/* Handle loading, error, and tracks state */}
+      {loading ? (
+        <p>Loading tracks...</p>
+      ) : error ? (
+        <p className="text-red-500">Error: {error}</p>
+      ) : tracks.length > 0 ? (
         <>
-            {tracks.length > 0 ? (
-                <>
-                    <PulsePlaylistModal
-                        open={modalOpen}
-                        onClose={handleCloseModal}
-                    />
-                    <PulsePlaylistMessage />
-                </>
-            ) : (
-                <>
-                    <div className="spacer"></div>
-                    <PulsePlaylistMessage />
-                </>
-            )}
+          <button
+            onClick={() => setModalOpen(true)}
+            className="btn-primary"
+            aria-label="View Playlist Modal"
+          >
+            View Playlist
+          </button>
+          <PulsePlaylistModal open={modalOpen} onClose={handleCloseModal} />
+          <PulsePlaylistMessage />
         </>
-    );
+      ) : (
+        <>
+          <div className="spacer"></div>
+          <PulsePlaylistMessage />
+          <p>No tracks found. Please select a mood to generate a playlist.</p>
+        </>
+      )}
+    </>
+  );
 };
 
 export default PulsePlaylist;

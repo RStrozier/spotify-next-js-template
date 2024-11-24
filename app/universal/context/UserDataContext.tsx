@@ -1,11 +1,10 @@
 "use client";
 
 import React, { createContext, useContext, ReactNode, useState, useEffect } from "react";
-import { useUserData } from "../hooks/useUserdata";
 import Cookies from "js-cookie";
+import { useUserData } from "../hooks/useUserdata";
 import { UserData, UserDataContextType, Playlist } from "../data/interfaces";
 
-// Extend the UserDataContextType to include favorites logic
 interface ExtendedUserDataContextType extends UserDataContextType {
   favoritePlaylists: Playlist[];
   toggleFavoritePlaylist: (playlistId: string, songs: string[], playlistName: string) => void;
@@ -15,21 +14,20 @@ interface ExtendedUserDataContextType extends UserDataContextType {
 // Create the context
 const UserDataContext = createContext<ExtendedUserDataContextType | undefined>(undefined);
 
-// Create the provider component
 export const UserDataProvider = ({ children }: { children: ReactNode }) => {
   const { userData: fetchedUserData, loading } = useUserData();
   const [userData, setUserData] = useState<UserData | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [favoritePlaylists, setFavoritePlaylists] = useState<Playlist[]>([]);
 
-  // Update context's userData when fetched data is available
+  // Update userData when fetched data is available
   useEffect(() => {
     if (fetchedUserData) {
       setUserData(fetchedUserData);
     }
   }, [fetchedUserData]);
 
-  // Retrieve the accessToken from cookies on component mount
+  // Retrieve the access token from cookies on component mount
   useEffect(() => {
     const token = Cookies.get("accessToken");
     if (token) {

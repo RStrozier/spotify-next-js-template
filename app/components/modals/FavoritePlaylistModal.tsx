@@ -6,7 +6,7 @@ import { useMood } from '@/app/universal/context/MoodContext';
 import CustomAlert from '../alerts/CustomAlert';
 
 export const favoritePlaylistModalStyle = {
-    position: 'absolute' as 'absolute',
+    position: 'absolute' as 'const',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',

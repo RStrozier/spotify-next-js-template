@@ -6,6 +6,7 @@ import LoadingIndicator from "../universal/LoadingIndicator";
 import SpotifyUserDisplay from "../components/user/SpotifyUserDisplay";
 import MoodSelector from "../components/mood/MoodSelector";
 import LoginModal from "../components/modals/LoginModal";
+import PulsePlaylist from "../components/playlist/PulsePlaylist";
 
 export default function HomePage() {
   const { userData, loading } = useUserDataContext(); // Access user data and loading state
@@ -37,6 +38,7 @@ export default function HomePage() {
     <>
        <SpotifyUserDisplay />
        <MoodSelector />
+       <PulsePlaylist />
     </>
 
   );
