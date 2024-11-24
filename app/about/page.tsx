@@ -1,6 +1,5 @@
 import { FaSpotify, FaMusic, FaHeart } from 'react-icons/fa';
 import { Container, Typography, Paper } from '@mui/material';
-import Navbar from '../components/navbar/Navbar';
 
 // TODO: STYLE THE CONTAINER HERE TO MATCH FLOW OF THE SITE
 const AboutPage = () => {

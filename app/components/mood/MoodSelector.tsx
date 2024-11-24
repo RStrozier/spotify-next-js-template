@@ -11,7 +11,6 @@ import MoodDescription from './MoodDescription';
 import { useToggle } from '@/app/universal/context/ToggleContext';
 import MoodAlert from '../alerts/MoodAlert';
 import PulsePlaylistModal from '../modals/PulsePlaylistModal';
-import UserSelection from '../user/UserSelection';
 
 const moods = moodData.moods as MoodKey[];
 const descriptions = moodDescriptions.moodDescriptions;
