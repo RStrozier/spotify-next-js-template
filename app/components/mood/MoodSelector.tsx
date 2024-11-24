@@ -11,6 +11,7 @@ import MoodDescription from './MoodDescription';
 import { useToggle } from '@/app/universal/context/ToggleContext';
 import MoodAlert from '../alerts/MoodAlert';
 import PulsePlaylistModal from '../modals/PulsePlaylistModal';
+import UserSelection from '../user/UserSelection';
 
 const moods = moodData.moods as MoodKey[];
 const descriptions = moodDescriptions.moodDescriptions;
@@ -42,14 +43,19 @@ const MoodSelector = () => {
     };
 
     return (
-        <div className="text-center my-4 mx-2">
+        <div className="text-center my-4 mx-2 shadow-lg">
             <div className="text-xl mb-2 text-gray-200 header-font">Select Your Mood</div>
             <MoodDescription />
             <div className="spacer"></div>
-            <div className="flex justify-center items-center">
-                <Button onClick={toggleExpand} className="flex items-center justify-center  hover:text-blue-700 underline transition-all">
+            <div className="flex justify-center items-center py-3 px-2">
+                <Button
+                    onClick={toggleExpand}
+                    className="flex items-center justify-center text-white font-bold py-2 px-4 rounded-full bg-blue-600 hover:bg-blue-700 transition-all duration-300 shadow-lg transform hover:scale-105"
+                >
                     {isExpanded ? <MdExpandLess /> : <MdExpandMore />}
-                    <span className="ml-2 text-base">{isExpanded ? 'Close Moods' : 'Select Mood'}</span>
+                    <span className="ml-2 text-base">
+                        {isExpanded ? 'Close Moods' : 'Select Mood'}
+                    </span>
                 </Button>
             </div>
             <div className="mini-spacer"></div>
@@ -67,23 +73,8 @@ const MoodSelector = () => {
                             >
                                 <Button
                                     variant="contained"
-                                    className={`transition-colors duration-300 ${selectedMood === mood ? 'bg-purple-500' : 'bg-gray-700'
-                                        }`}
+                                    className="bg-gray-700 text-white font-bold py-2 px-4 rounded-md shadow-md hover:bg-red-500 hover:shadow-lg transition-all duration-300 focus:ring-2 focus:ring-purple-300 focus:ring-offset-2"
                                     onClick={() => handleMoodSelect(mood)}
-                                    sx={{
-                                        backgroundColor:
-                                            selectedMood === mood ? 'rgba(255, 0, 0, 0.8)' : '#333',
-                                        color: '#F0F0F0',
-                                        padding: '4px 8px',
-                                        border: '2px solid transparent',
-                                        backgroundImage:
-                                            selectedMood === mood
-                                                ? 'linear-gradient(to right, rgba(255, 0, 0, 0.8), rgba(0, 0, 50, 1))'
-                                                : 'none',
-                                        backgroundClip: 'padding-box',
-                                        boxShadow: '0px 0px 2px rgba(275, 0, 0, 0.4)',
-                                        fontFamily: 'default-roboto',
-                                    }}
                                 >
                                     {mood}
                                 </Button>
@@ -92,18 +83,13 @@ const MoodSelector = () => {
                     </div>
                     <Button
                         variant="contained"
-                        className="mt-4"
+                        className="mt-4 p-4 mx-2"
                         onClick={() => toggleExpand()} // Close overlay when clicked
                     >
-                        Close
+                        Confirm Mood
                     </Button>
                 </div>
             )}
-
-            {/* <div className="default-roboto text-sm">
-                Select mood above.  Click below to generate pulse playlist.
-            </div>
-            <div className="spacer"></div> */}
 
             {/* Selects mood and generates a pulse playlist */}
             <Button
@@ -111,10 +97,11 @@ const MoodSelector = () => {
                 onClick={handleGeneratePlaylist}
                 className="bg-red-500 hover:bg-red-600 text-white font-nunito font-bold py-2 px-6 rounded-lg shadow-lg transform hover:scale-105 transition-all"
             >
-                Generate<span className="mx-1 text-red-200">{selectedMood}</span> Playlist!
+                Generate My<span className="mx-1 text-red-200">{selectedMood}</span>Playlist!
             </Button>
 
             <MoodAlert />
+            <br />
             <div className="spacer"></div>
 
             {/* Add the modal component here */}

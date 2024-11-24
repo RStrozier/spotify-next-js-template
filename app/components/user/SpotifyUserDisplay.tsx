@@ -19,18 +19,18 @@ export default function SpotifyUserDisplay() {
         </h1>
 
         {userData.images?.[0]?.url && (
-          <div className="flex justify-center mt-4">
-            <div className="relative w-32 h-32 rounded-full border border-gray-500 p-1">
-              <img
-                src={userData.images[0].url}
-                alt="Profile"
-                className="w-full h-full rounded-full object-cover"
-              />
-            </div>
+          <div className="flex justify-center mt-4 group">
+          <div className="relative w-32 h-32 rounded-full border border-gray-500 p-1 overflow-hidden">
+            <img
+              src={userData.images[0].url}
+              alt="Profile"
+              className="w-full h-full rounded-full object-cover transform transition-transform duration-300 group-hover:scale-105"
+            />
           </div>
+        </div>
         )}
 
-        <p className="text-sm font-roboto text-gray-400 text-center mt-3">
+        <p className="text-sm text-gray-400 text-center mt-3">
           Email: {userData.email}
         </p>
       </div>
