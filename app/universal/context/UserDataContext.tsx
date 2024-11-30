@@ -21,6 +21,8 @@ export const UserDataProvider = ({ children }: { children: ReactNode }) => {
   const [favoritePlaylists, setFavoritePlaylists] = useState<Playlist[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
 
+  // THIS DATA IS AVAILIBLE SERVER SIDE, BUT NOW I CANNOT RENDER IT CLIENT SIDE
+
   // Update userData when fetched data is available
   useEffect(() => {
     if (fetchedUserData) {
