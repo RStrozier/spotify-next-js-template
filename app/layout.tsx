@@ -4,6 +4,7 @@ import { UserDataProvider } from "./universal/context/UserDataContext";
 import { MoodProvider } from "./universal/context/MoodContext";
 import { ToggleProvider } from "./universal/context/ToggleContext";
 import Navbar from "./components/navbar/Navbar";
+import { SpotifyProvider } from "./universal/context/SpotifyContext";
 
 export const metadata: Metadata = {
   title: "Pulse Playlist",
@@ -26,13 +27,15 @@ export default function RootLayout({
       </head>
       <body>
         <UserDataProvider>
+        <SpotifyProvider>
           <MoodProvider>
             <ToggleProvider>
               <Navbar />
               {children}
             </ToggleProvider>
           </MoodProvider>
-        </UserDataProvider>
+          </SpotifyProvider>
+          </UserDataProvider>
       </body>
     </html>
   );

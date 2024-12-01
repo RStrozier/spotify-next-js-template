@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
-import { useMood } from "../context/MoodContext"; // Context for selected mood
-import { useUserDataContext } from "../context/UserDataContext"; // Context for Spotify access token
-import moodMappingJson from "../../universal/data/mood-mapping.json"; // Mood mapping JSON
-import { MoodMapping, Track } from "../data/interfaces"; // Interfaces for type safety
+import { useMood } from "../context/MoodContext";
+import moodMappingJson from "../../universal/data/mood-mapping.json";
+import { MoodMapping, Track } from "../data/interfaces";
+import { useSpotify } from "../context/SpotifyContext"; // Import the Spotify context
 
 const moodMapping: MoodMapping = moodMappingJson.moodMappings;
 
 export const useSpotifyRecommendations = () => {
-  const { selectedMood } = useMood(); // Get the selected mood from context
-  const { accessToken } = useUserDataContext(); // Get the Spotify access token
-
-  const [tracks, setTracks] = useState<Track[]>([]); // State to store fetched tracks
-  const [loading, setLoading] = useState<boolean>(false); // Loading state
-  const [error, setError] = useState<string | null>(null); // Error state
+  const { selectedMood } = useMood();
+  const { accessToken } = useSpotify(); // Access the accessToken from the context
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log("Selected mood:", selectedMood); // Debugging
-    console.log("Access token in useSpotifyRecommendations:", accessToken); // Debugging
+    console.log("Selected mood:", selectedMood);
+    console.log("Access token in useSpotifyRecommendations:", accessToken);
 
     if (!accessToken) {
       setError("Access token is missing or invalid.");
@@ -60,7 +59,7 @@ export const useSpotifyRecommendations = () => {
     };
 
     fetchRecommendations();
-  }, [selectedMood, accessToken]);
+  }, [selectedMood, accessToken]); // Add accessToken to the dependency array
 
   return { tracks, loading, error };
 };

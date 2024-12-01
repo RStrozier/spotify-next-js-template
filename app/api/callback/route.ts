@@ -31,15 +31,21 @@ export async function GET(req: NextRequest) {
     );
 
     console.log("Response from Spotify token endpoint:", response.data); // Debugging log
-    const { access_token, expires_in } = response.data;
+    const { access_token, refresh_token, expires_in } = response.data; // Destructure refresh token
     console.log("Access token received:", access_token);
     console.log("Token expires in (seconds):", expires_in);
-
-    // Set the access token as a cookie
+    
+    // Set the access token and refresh token as cookies
     const headers = new Headers();
     headers.append(
       "Set-Cookie",
-      `access_token=${access_token}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=${expires_in}`
+      // TODO: NEED TO ADD SECURE BACK HERE ONCE LIVE
+      `access_token=${access_token}; Path=/; HttpOnly; SameSite=None; Max-Age=${expires_in}`
+    );
+    headers.append(
+      "Set-Cookie",
+       // TODO: NEED TO ADD SECURE BACK HERE ONCE LIVE
+      `refresh_token=${refresh_token}; Path=/; HttpOnly; SameSite=None; Max-Age=31536000` // Set long expiration for refresh token
     );
     console.log("Set-Cookie header being sent:", headers.get("Set-Cookie")); // Debugging log
 

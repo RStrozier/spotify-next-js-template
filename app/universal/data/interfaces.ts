@@ -48,8 +48,6 @@ export interface UserData {
   export interface UserDataContextType {
     userData: UserData | null;
     setUserData: React.Dispatch<React.SetStateAction<UserData | null>>;
-    accessToken: string | null;
-    setAccessToken: (token: string | null) => void;
     loading: boolean;
   }
 
